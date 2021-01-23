@@ -1,10 +1,12 @@
 const todoList = document.querySelector(".todo-list");
 const todoForm = document.querySelector(".get-todo-form");
 const inputTodo = todoForm.querySelector("input");
+const todoCnt = document.querySelector(".todo-count");
 
 const TODO_LS = "toDos"
 
 let toDos = [];
+let finDos =[];
 
 function saveList(){
     localStorage.setItem(TODO_LS,JSON.stringify(toDos));
@@ -19,6 +21,7 @@ function deleteToDo(event){
     });
     toDos = cleanToDos;
     saveList();
+    showCnt();
 }
 
 function addList(text){
@@ -42,6 +45,7 @@ function addList(text){
     };
     toDos.push(toDoObj);
     saveList();
+    showCnt();
 }
 
 function handleSubmit(event){
@@ -49,6 +53,10 @@ function handleSubmit(event){
     const val = inputTodo.value;
     addList(val);
     inputTodo.value="";
+}
+
+function showCnt(){
+    todoCnt.innerHTML=`${finDos.length}/${toDos.length}`;
 }
 
 function showList(){
@@ -64,5 +72,6 @@ function showList(){
 function init(){
     showList();
     todoForm.addEventListener("submit",handleSubmit);
+    showCnt();
 }
 init();
