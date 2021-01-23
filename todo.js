@@ -2,15 +2,23 @@ const todoList = document.querySelector(".todo-list");
 const todoForm = document.querySelector(".get-todo-form");
 const inputTodo = todoForm.querySelector("input");
 
-const TODO_LS = "todo"
+const TODO_LS = "toDos"
 
-
-function showList(){
-    
-}
+let toDos = [];
 
 function saveList(){
+    localStorage.setItem(TODO_LS,JSON.stringify(toDos));
+}
 
+function deleteToDo(event){
+    const btn = event.target;
+    const li = btn.parentNode;
+    todoList.removeChild(li);
+    const cleanToDos = toDos.filter(function(toDo){
+        return toDo.id !== parseInt(li.id);
+    });
+    toDos = cleanToDos;
+    saveList();
 }
 
 function addList(text){
@@ -18,15 +26,21 @@ function addList(text){
     const checkbox = document.createElement("input");
     const span = document.createElement("span");
     const button = document.createElement("button");
+    const newId = toDos.length+1;
     checkbox.type="checkbox";
-    checkbox.addEventListener("")
     span.innerText=text;
     button.innerText="X"
-    button.addEventListener("click",handleClick);
+    button.addEventListener("click",deleteToDo);
     li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(button);
+    li.id = newId;
     todoList.appendChild(li);
+    const toDoObj = {
+        text:text,
+        id:newId
+    };
+    toDos.push(toDoObj);
     saveList();
 }
 
@@ -34,6 +48,17 @@ function handleSubmit(event){
     event.preventDefault();
     const val = inputTodo.value;
     addList(val);
+    inputTodo.value="";
+}
+
+function showList(){
+    const loadToDos = localStorage.getItem(TODO_LS);
+    if(loadToDos !== null){
+        const parsedToDos = JSON.parse(loadToDos);
+        parsedToDos.forEach(function(toDo){
+            addList(toDo.text);
+        });
+    }
 }
 
 function init(){
