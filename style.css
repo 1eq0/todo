@@ -1,0 +1,73 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+h1 {
+  font-size: 100px;
+  margin-bottom: 10px;
+}
+h2 {
+  margin: 0;
+  font-size: 50px;
+}
+input {
+  border: none;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.todo {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.todo > ul {
+  width: 40%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  list-style-type: none;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.no-show {
+  display: none;
+}
+li {
+  display: flex;
+  align-items: baseline;
+}
+li > input {
+  margin: 0;
+  margin-right: 10px;
+  cursor: pointer;
+}
+li > button {
+  background: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
+}
+li > button:focus {
+  outline: 0;
+}
