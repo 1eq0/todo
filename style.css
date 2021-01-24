@@ -40,6 +40,7 @@ input:focus {
   color: white;
 }
 .get-name {
+  color: white;
   width: 100%;
   font-size: large;
   padding: 10px;
